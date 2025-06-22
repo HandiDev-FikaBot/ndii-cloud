@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FokaBot Multi Device</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 3rem;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    #question {
+      width: 300px;
+      padding: 12px;
+      border-radius: 25px;
+      border: none;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 15px;
+      outline: none;
+      box-shadow: 0 0 10px #2575fc;
+    }
+    button {
+      background-color: #ff6f61;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255,111,97,0.6);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #e65c50;
+    }
+    #answer {
+      margin-top: 25px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      min-height: 50px;
+      text-shadow: 0 0 10px #ff6f61;
+    }
+    footer {
+      position: fixed;
+      bottom: 10px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>FikaBot Multi Device</h1>
+  <input
+    id="question"
+    type="text"
+    placeholder="Tanyakan sesuatu ke fika..."
+    autocomplete="off"
+  />
+  <button id="askBtn">Tanya Fika</button>
+  <div id="answer"></div>
+
+  <footer>© Powered By Handi</footer>
+
+  <script>
+    const answers = [
+      "Ya, tentu saja!",
+      "Tidak, jangan harap.",
+      "Mungkin suatu saat nanti.",
+      "Coba lagi nanti.",
+      "Saya tidak yakin.",
+      "Jawaban jelas: YA!",
+      "Jangan terlalu berharap.",
+      "Kemungkinan besar.",
+      "Sangat kecil kemungkinan.",
+      "Percayalah pada dirimu sendiri.",
+      "Tanyakan lagi dengan lebih jelas.",
+      "Hasilnya memuaskan.",
+      "Tidak bisa diprediksi sekarang.",
+      "Sangat mungkin terjadi.",
+      "Saya rasa itu ide yang bagus."
+    ];
+
+    const askBtn = document.getElementById("askBtn");
+    const questionInput = document.getElementById("question");
+    const answerDiv = document.getElementById("answer");
+
+    askBtn.addEventListener("click", () => {
+      const question = questionInput.value.trim();
+      if (!question) {
+        answerDiv.textContent = "Tolong tulis pertanyaan dulu ya!";
+        answerDiv.style.color = "#ffaaaa";
+        return;
+      }
+
+      // kasih efek loading dulu
+      answerDiv.style.color = "#fff";
+      answerDiv.textContent = "Fika Memikirkan jawaban...";
+
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        answerDiv.textContent = answers[randomIndex];
+        answerDiv.style.color = "#ff6f61";
+      }, 1500);
+    });
+
+    // juga bisa tekan Enter untuk tanya
+    questionInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        askBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
